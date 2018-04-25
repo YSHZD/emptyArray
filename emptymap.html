@@ -45,11 +45,11 @@ console.log(sarr)//[empty, 1]
 console.log([,,'a','b',,null,undefined])
 
 var str = [,,'a','b',,null,undefined].join('#');
-console.log(str)//##a#b###    ？？？？？不明白
+console.log(str)//##a#b###    就是把，换成#
 
 var str2 = [,'a',,'b',undefined,null,,].toString();
 console.log(str2)//,a,,b,,,
-console.log((new Array(9)).join(',').split('').map((x,i)=>x = i))//[0, 1, 2, 3, 4, 5, 6, 7]   比new Aarry少两个
+console.log((new Array(9)).join(',').split('').map((x,i)=>x = i))//[0, 1, 2, 3, 4, 5, 6, 7]   
 
 </script>
 </html>
