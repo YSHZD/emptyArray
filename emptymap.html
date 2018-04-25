@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>emptymap</title>
+</head>
+<body>
+数组的空位
+数组的空位指，数组的某一个位置没有任何值。比如， Array  构造函数返回的数组都是空位。
+Array(3) // [, , ,]
+上面代码中， Array(3)  返回一个具有 3 个空位的数组。
+注意，空位不是 undefined  ，一个位置的值等于 undefined  ，依然是有值的。空位是没有任何
+值， in  运算符可以说明这一点。
+0 in [undefined, undefined, undefined] // true
+0 in [, , ,] // false
+上面代码说明，第一个数组的 0 号位置是有值的，第二个数组的 0 号位置没有值。
+ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位。
+
+
+forEach()  ,  filter()  ,  every()  和 some()  都会跳过空位。
+
+
+map()  会跳过空位，但会保留这个值
+join()  和 toString()  会将空位视为 undefined  ，而 undefined  和 null  会被处理成空字符
+串。
+
+ES6 则是明确将空位转为 undefined  。
+Array.from  方法会将数组的空位，转为 undefined  ，也就是说，这个方法不会忽略空位。
+Array.from(['a',,'b'])
+// [ "a", undefined, "b" ]
+扩展运算符（ ...  ）也会将空位转为 undefined  。
+
+
+</body>
+<script>
+[1,,2].forEach((x,i) => console.log(i));// 0 2
+var arr = ['a',,'b'].filter(x => x)
+console.log(arr)//["a", "b"]
+var falg = ['b',,'b'].every(x => x === 'b')
+console.log(falg)//true
+var flag = [,'a',].some(x => x!=='a');
+console.log(flag)//false
+var sarr = [,'a'].map(x=>1);
+console.log(sarr)//[empty, 1]
+console.log([,,'a','b',,null,undefined])
+
+var str = [,,'a','b',,null,undefined].join('#');
+console.log(str)//##a#b###    ？？？？？不明白
+
+var str2 = [,'a',,'b',undefined,null,,].toString();
+console.log(str2)//,a,,b,,,
+console.log((new Array(9)).join(',').split('').map((x,i)=>x = i))//[0, 1, 2, 3, 4, 5, 6, 7]   比new Aarry少两个
+
+</script>
+</html>
